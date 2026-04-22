@@ -22,14 +22,10 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
 
     return (
         <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row font-sans selection:bg-accent/20 relative isolation-auto">
-            {/* Ambient Background - Makes Glassmorphism visible */}
-            <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-accent/5 rounded-full blur-[100px] animate-pulse duration-[4000ms]" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-500/5 rounded-full blur-[100px] animate-pulse duration-[7000ms]" />
-            </div>
+            {/* Flat Background */}
 
             {/* Mobile Header */}
-            <header className="md:hidden flex items-center justify-between p-4 border-b border-surfaceHighlight bg-surface/50 backdrop-blur-md sticky top-0 z-20">
+            <header className="md:hidden flex items-center justify-between p-4 border-b border-surfaceHighlight bg-surface sticky top-0 z-20">
                 <div className="flex items-center gap-2 h-8">
                     <Logo className="h-full" />
                     <span className="font-bold text-lg">Ituts</span>
@@ -97,7 +93,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             )}
 
             {/* Desktop Sidebar */}
-            <aside className="w-64 border-r border-surfaceHighlight bg-surface/50 hidden md:flex flex-col p-4 fixed h-full z-10 backdrop-blur-md">
+            <aside className="w-64 border-r border-surfaceHighlight bg-surface hidden md:flex flex-col p-4 fixed h-full z-10">
                 <div className="flex items-center justify-start gap-3 mb-8 px-2 h-12">
                     <Logo className="h-full" />
                 </div>

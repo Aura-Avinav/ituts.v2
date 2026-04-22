@@ -96,7 +96,7 @@ export function YearView({ onSelectMonth }: YearViewProps) {
                         }}
                         className="w-full text-left bg-surface/30 backdrop-blur-sm border border-surfaceHighlight rounded-xl p-6 hover:bg-surfaceHighlight/10 transition-colors group cursor-pointer"
                     >
-                        <h3 className="text-2xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                        <h3 className="text-2xl font-serif font-bold text-primary mb-2 group-hover:text-accent transition-colors">
                             {format(monthDate, 'MMMM')}
                         </h3>
                         <p className="text-secondary opacity-60">

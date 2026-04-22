@@ -56,7 +56,7 @@ export function AuthPage() {
                     </p>
                 </div>
 
-                <div className="bg-surface/30 border border-surfaceHighlight rounded-3xl p-8 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <div className="bg-surface border border-surfaceHighlight rounded-3xl p-8 shadow-2xl">
                     <form onSubmit={handleAuth} className="space-y-6">
                         {message && (
                             <div className={`p-4 rounded-xl flex items-start gap-3 text-sm ${message.type === 'success'

@@ -23,7 +23,7 @@ export function AchievementBoard({ date }: { date: Date }) {
     return (
         <div className="h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
+                <h3 className="text-xl font-serif font-bold flex items-center gap-2 text-primary">
                     <Award className="w-5 h-5 text-accent" />
                     Achievements
                 </h3>

@@ -4,16 +4,16 @@
 
 @layer base {
   :root {
-    --background: 252 250 238; /* #fcfaee - Cream background */
-    --surface: 255 255 255; /* #ffffff - Pure white surface */
-    --surface-highlight: 240 238 226; /* Slightly darker cream for highlights */
-    --primary: 26 26 26; /* #1a1a1a - Near black text */
-    --primary-foreground: 252 250 238; /* Cream text on dark primary elements */
-    --secondary: 100 100 100; /* Medium gray */
-    --success: 22 163 74;
-    --danger: 220 38 38;
-    --card: 255 255 255;
-    --card-foreground: 26 26 26;
+    --background: 18 18 18; /* #121212 - Deep dark background */
+    --surface: 28 28 28; /* #1C1C1C - Flat dark surface for cards */
+    --surface-highlight: 45 45 45; /* Lighter gray for borders/highlights */
+    --primary: 245 245 240; /* #F5F5F0 - Cream text for high contrast */
+    --primary-foreground: 18 18 18; /* Dark text on primary buttons */
+    --secondary: 160 160 160; /* Medium gray */
+    --success: 34 197 94;
+    --danger: 239 68 68;
+    --card: 28 28 28;
+    --card-foreground: 245 245 240;
     --accent: 228 193 249; /* Soft purple from screenshot */
   }
 
@@ -147,7 +147,7 @@
 
 @layer components {
   .btn-premium {
-    @apply px-6 py-3 bg-accent text-primary border-2 border-primary rounded-xl font-medium transition-all hover:bg-accent/80 shadow-[4px_4px_0px_0px_rgba(26,26,26,0.1)] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,0.1)] hover:translate-y-[2px] hover:translate-x-[2px];
+    @apply px-6 py-3 bg-accent text-primary-foreground border-2 border-primary rounded-xl font-medium transition-all hover:bg-accent/90 shadow-[4px_4px_0px_0px_rgba(245,245,240,0.1)] hover:shadow-[2px_2px_0px_0px_rgba(245,245,240,0.1)] hover:translate-y-[2px] hover:translate-x-[2px];
   }
 }
 

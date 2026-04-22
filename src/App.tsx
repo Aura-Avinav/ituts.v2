@@ -215,7 +215,7 @@ function App() {
               </div>
 
               <div className="flex flex-col items-end gap-2 shrink-0">
-                <div className="px-3 py-2 bg-surface/50 rounded-xl border border-surfaceHighlight/50 backdrop-blur-sm text-center">
+                <div className="px-3 py-2 bg-surface rounded-xl border border-surfaceHighlight text-center">
                   <span className="block text-lg font-bold text-primary font-mono">
                     {isCurrentMonth ? `${todayDate} / ${daysInMonth}` : daysInMonth}
                   </span>
@@ -228,7 +228,7 @@ function App() {
 
             {/* Section 1: Protocols (Habits) */}
             <section>
-              <div className="bg-surface/30 backdrop-blur-md border border-surfaceHighlight rounded-2xl p-4 md:p-6 shadow-xl relative overflow-hidden group">
+              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <HabitGrid date={currentDate} key={`habit-grid-${currentDate.toISOString()}`} />
               </div>
@@ -236,24 +236,24 @@ function App() {
 
             {/* Section 1.5: Mood & Energy (New) */}
             <section>
-              <div className="bg-surface/30 backdrop-blur-md border border-surfaceHighlight rounded-2xl p-4 md:p-6 shadow-xl">
+              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl">
                 <MoodSelector date={currentDate} />
               </div>
             </section>
 
             {/* Section 2: Achievements & ToDo */}
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-surface/30 backdrop-blur-md border border-surfaceHighlight rounded-2xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
+              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
                 <AchievementBoard date={currentDate} key={`achievements-${currentDate.toISOString()}`} />
               </div>
-              <div className="bg-surface/30 backdrop-blur-md border border-surfaceHighlight rounded-2xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
+              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
                 <TodoBoard />
               </div>
             </section>
 
             {/* Section 3: Metrics */}
             <section>
-              <div className="bg-surface/30 backdrop-blur-md border border-surfaceHighlight rounded-2xl p-4 md:p-6 shadow-xl">
+              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl">
                 <MetricGraph date={currentDate} key={currentDate.toISOString()} />
               </div>
             </section>

@@ -24,7 +24,7 @@ export function WeeklyTodo() {
     return (
         <div className="h-full flex flex-col">
             <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold flex items-center gap-2 text-primary">
+                <h3 className="text-xl font-serif font-bold flex items-center gap-2 text-primary">
                     <CalendarDays className="w-5 h-5 text-pink-500" />
                     Weekly To-Do
                 </h3>
