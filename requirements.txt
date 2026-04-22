@@ -1,0 +1,4 @@
+google-generativeai
+python-dotenv
+openai
+# Force rebuild for Gemini switch

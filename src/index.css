@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 252 250 238; /* #fcfaee - Cream background */
+    --surface: 255 255 255; /* #ffffff - Pure white surface */
+    --surface-highlight: 240 238 226; /* Slightly darker cream for highlights */
+    --primary: 26 26 26; /* #1a1a1a - Near black text */
+    --primary-foreground: 252 250 238; /* Cream text on dark primary elements */
+    --secondary: 100 100 100; /* Medium gray */
+    --success: 22 163 74;
+    --danger: 220 38 38;
+    --card: 255 255 255;
+    --card-foreground: 26 26 26;
+    --accent: 228 193 249; /* Soft purple from screenshot */
+  }
+
+  .dark {
+    /* Keeping old dark theme just in case it's toggled */
+    --background: 9 9 11;
+    --surface: 24 24 27;
+    --surface-highlight: 39 39 42;
+    --primary: 228 228 231;
+    --primary-foreground: 24 24 27;
+    --secondary: 161 161 170;
+    --success: 34 197 94;
+    --danger: 239 68 68;
+    --card: 24 24 27;
+    --card-foreground: 250 250 250;
+  }
+
+  body {
+    @apply bg-background text-primary antialiased;
+  }
+
+  /* Typography Settings */
+  :root {
+    /* Font Stacks */
+    --font-stack-sans: "Inter", "Satoshi", "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-stack-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-stack-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* default to sans */
+    --font-ui: var(--font-stack-sans);
+  }
+
+  /* Dynamic Accent Colors */
+  /* Default (Blue) */
+  :root[data-accent="blue"] {
+    --accent: 59 130 246;
+  }
+
+  /* #3b82f6 */
+  .light[data-accent="blue"] {
+    --accent: 37 99 235;
+  }
+
+  /* #2563eb */
+
+  /* Purple */
+  :root[data-accent="purple"] {
+    --accent: 147 51 234;
+  }
+
+  /* #9333ea */
+  .light[data-accent="purple"] {
+    --accent: 126 34 206;
+  }
+
+  /* #7e22ce */
+
+  /* Rose */
+  :root[data-accent="rose"] {
+    --accent: 244 63 94;
+  }
+
+  /* #f43f5e */
+  .light[data-accent="rose"] {
+    --accent: 225 29 72;
+  }
+
+  /* #e11d48 */
+
+  /* Orange */
+  :root[data-accent="orange"] {
+    --accent: 249 115 22;
+  }
+
+  /* #f97316 */
+  .light[data-accent="orange"] {
+    --accent: 234 88 12;
+  }
+
+  /* #ea580c */
+
+  /* Green */
+  :root[data-accent="green"] {
+    --accent: 34 197 94;
+  }
+
+  /* #22c55e */
+  .light[data-accent="green"] {
+    --accent: 22 163 74;
+  }
+
+  /* #16a34a */
+
+  /* Cyan */
+  :root[data-accent="cyan"] {
+    --accent: 6 182 212;
+  }
+
+  /* #06b6d4 */
+  .light[data-accent="cyan"] {
+    --accent: 8 145 178;
+  }
+
+  /* #0891b2 */
+
+  :root[data-font-size="sm"] {
+    font-size: 14px;
+  }
+
+  :root[data-font-size="base"] {
+    font-size: 16px;
+  }
+
+  :root[data-font-size="lg"] {
+    font-size: 18px;
+  }
+
+  /* Map selections to the UI font variable */
+  :root[data-font-family="sans"] {
+    --font-ui: var(--font-stack-sans);
+  }
+
+  :root[data-font-family="serif"] {
+    --font-ui: var(--font-stack-serif);
+  }
+
+  :root[data-font-family="mono"] {
+    --font-ui: var(--font-stack-mono);
+  }
+}
+
+@layer components {
+  .btn-premium {
+    @apply px-6 py-3 bg-accent text-primary border-2 border-primary rounded-xl font-medium transition-all hover:bg-accent/80 shadow-[4px_4px_0px_0px_rgba(26,26,26,0.1)] hover:shadow-[2px_2px_0px_0px_rgba(26,26,26,0.1)] hover:translate-y-[2px] hover:translate-x-[2px];
+  }
+}
+
+/* Custom Scrollbar for "Premium" feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surfaceHighlight rounded-full;
+}
