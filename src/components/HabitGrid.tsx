@@ -222,7 +222,7 @@ export function HabitGrid({ date }: { date: Date }) {
                         </p>
                         <button
                             onClick={handleAddClick}
-                            className="px-6 py-2.5 bg-accent text-background font-bold rounded-lg hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-accent/20"
+                            className="btn-premium flex items-center justify-center font-bold"
                         >
                             Create First Protocol
                         </button>
