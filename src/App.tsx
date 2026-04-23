@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { AuthPage } from './components/AuthPage';
-import { LandingPage } from './components/LandingPage';
+
 import { HabitGrid } from './components/HabitGrid';
 import { AchievementBoard } from './components/AchievementBoard';
 import { TodoBoard } from './components/TodoBoard';
@@ -59,8 +59,7 @@ function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const { data, user, authLoading } = useStore();
   
-  const [showAuth, setShowAuth] = useState(false);
-  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+
 
   // Midnight Reset Logic: Check every minute if the day has changed
   useEffect(() => {
