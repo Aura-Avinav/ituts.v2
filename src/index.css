@@ -50,7 +50,13 @@
     --font-ui: var(--font-stack-sans);
   }
 
-
+  /* Dynamic Accent Colors (Psychologically Attractive) */
+  :root[data-accent="blue"] { --accent: 58 134 255; } /* #3A86FF - Electric Blue */
+  :root[data-accent="purple"] { --accent: 131 56 236; } /* #8338EC - Deep Violet */
+  :root[data-accent="rose"] { --accent: 255 0 110; } /* #FF006E - Vibrant Rose/Pink */
+  :root[data-accent="orange"] { --accent: 251 86 7; } /* #FB5607 - Energetic Orange */
+  :root[data-accent="green"] { --accent: 56 176 0; } /* #38B000 - Emerald Green */
+  :root[data-accent="cyan"] { --accent: 0 180 216; } /* #00B4D8 - Bright Cyan */
 
   :root[data-font-size="sm"] {
     font-size: 14px;

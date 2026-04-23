@@ -6,8 +6,18 @@ import { format, eachDayOfInterval } from 'date-fns';
 
 export function MetricGraph({ date }: { date: Date }) {
     const { data } = useStore();
-    // Psychologically attractive energetic coral/purple gradient feel
-    const activeColor = '#FF6B6B'; 
+    const accent = data.preferences?.accentColor || 'rose';
+
+    const colorMap: Record<string, string> = {
+        blue: '#3A86FF',
+        purple: '#8338EC',
+        rose: '#FF006E',
+        orange: '#FB5607',
+        green: '#38B000',
+        cyan: '#00B4D8',
+    };
+
+    const activeColor = colorMap[accent] || '#FF006E'; 
     const secondaryColor = '#8338EC';
 
     const currentMonthStr = format(date, 'yyyy-MM');

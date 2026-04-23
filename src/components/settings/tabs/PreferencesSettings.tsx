@@ -166,21 +166,21 @@ export function PreferencesSettings() {
                             </label>
                             <div className="flex flex-wrap gap-2">
                                 {[
-                                    { id: 'blue', color: 'bg-blue-500' },
-                                    { id: 'purple', color: 'bg-purple-500' },
-                                    { id: 'rose', color: 'bg-rose-500' },
-                                    { id: 'orange', color: 'bg-orange-500' },
-                                    { id: 'green', color: 'bg-green-500' },
-                                    { id: 'cyan', color: 'bg-cyan-500' },
+                                    { id: 'blue', hex: '#3A86FF' },
+                                    { id: 'purple', hex: '#8338EC' },
+                                    { id: 'rose', hex: '#FF006E' },
+                                    { id: 'orange', hex: '#FB5607' },
+                                    { id: 'green', hex: '#38B000' },
+                                    { id: 'cyan', hex: '#00B4D8' },
                                 ].map((c) => (
                                     <button
                                         key={c.id}
                                         onClick={() => handleChange('accentColor', c.id)}
                                         className={cn(
                                             "w-8 h-8 rounded-full transition-all flex items-center justify-center ring-2 ring-offset-2 ring-offset-background",
-                                            c.color,
                                             draft.accentColor === c.id ? "ring-foreground scale-110" : "ring-transparent hover:scale-110"
                                         )}
+                                        style={{ backgroundColor: c.hex }}
                                         aria-label={`Select ${c.id} accent`}
                                     >
                                         {draft.accentColor === c.id && <Check className="w-4 h-4 text-white font-bold" strokeWidth={3} />}
