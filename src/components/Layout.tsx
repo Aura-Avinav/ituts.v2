@@ -4,6 +4,7 @@ import { Logo } from './ui/Logo';
 
 import { cn } from '../lib/utils';
 import { useStore } from '../hooks/useStore';
+import { useTranslation } from '../hooks/useTranslation';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -14,6 +15,7 @@ interface LayoutProps {
 
 export function Layout({ children, currentView, onNavigate, currentDate = new Date() }: LayoutProps) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+    const { t } = useTranslation();
 
     const handleMobileNavigate = (view: 'dashboard' | 'journal' | 'achievements' | 'year' | 'settings') => {
         onNavigate(view);
@@ -61,19 +63,19 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
                         <nav className="space-y-4">
                             <NavItem
                                 icon={<CheckSquare />}
-                                label="Tracker"
+                                label={t("Tracker")}
                                 active={currentView === 'dashboard'}
                                 onClick={() => handleMobileNavigate('dashboard')}
                             />
                             <NavItem
                                 icon={<Book />}
-                                label="Journal"
+                                label={t("Journal")}
                                 active={currentView === 'journal'}
                                 onClick={() => handleMobileNavigate('journal')}
                             />
                             <NavItem
                                 icon={<Calendar />}
-                                label="2026 Overview"
+                                label={t("2026 Overview")}
                                 active={currentView === 'year'}
                                 onClick={() => handleMobileNavigate('year')}
                             />
@@ -83,7 +85,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
                             <ResetButton currentDate={currentDate} />
                             <NavItem
                                 icon={<Settings />}
-                                label="Settings"
+                                label={t("Settings")}
                                 active={currentView === 'settings'}
                                 onClick={() => handleMobileNavigate('settings')}
                             />
@@ -98,22 +100,22 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
                     <Logo className="h-full" />
                 </div>
 
-                <nav className="space-y-2">
+                <nav className="flex-1 space-y-3 relative z-10 flex flex-col justify-center py-8">
                     <NavItem
                         icon={<CheckSquare />}
-                        label="Tracker"
+                        label={t("Tracker")}
                         active={currentView === 'dashboard'}
                         onClick={() => onNavigate('dashboard')}
                     />
                     <NavItem
                         icon={<Book />}
-                        label="Journal"
+                        label={t("Journal")}
                         active={currentView === 'journal'}
                         onClick={() => onNavigate('journal')}
                     />
                     <NavItem
                         icon={<Calendar />}
-                        label="2026 Overview"
+                        label={t("2026 Overview")}
                         active={currentView === 'year'}
                         onClick={() => onNavigate('year')}
                     />
@@ -123,7 +125,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
                     <ResetButton currentDate={currentDate} />
                     <NavItem
                         icon={<Settings />}
-                        label="Settings"
+                        label={t("Settings")}
                         active={currentView === 'settings'}
                         onClick={() => onNavigate('settings')}
                     />

@@ -3,9 +3,10 @@ import { useStore } from '../../../hooks/useStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '../../../lib/utils';
-import { t } from '../../../lib/i18n';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 export function PreferencesSettings() {
+    const { t } = useTranslation();
     const {
         data,
         updatePreferences
@@ -96,7 +97,7 @@ export function PreferencesSettings() {
             {/* Header */}
             <div className="space-y-1">
                 <h2 className="text-xl font-semibold text-foreground tracking-tight">Preferences</h2>
-                <p className="text-sm text-secondary leading-relaxed">Customize your experience to fit your workflow.</p>
+                <p className="text-sm text-secondary leading-relaxed">{t('Customize your experience to fit your workflow.')}</p>
             </div>
 
             <div className="grid gap-6">
@@ -154,7 +155,7 @@ export function PreferencesSettings() {
                             <div className="p-1.5 rounded-md bg-accent/10 text-accent">
                                 <span className="w-4 h-4 rounded-full border-2 border-current block" />
                             </div>
-                            {t(draft.language || 'en-US', 'personalize')}
+                            {t('Personalize')}
                         </h3>
                         <p className="text-xs text-secondary pl-9">Make it yours.</p>
                     </div>
@@ -163,7 +164,7 @@ export function PreferencesSettings() {
                         {/* Accent Color */}
                         <div className="space-y-3">
                             <label className="text-sm font-medium text-secondary flex items-center gap-2">
-                                Accent Color
+                                {t('Accent Color')}
                             </label>
                             <div className="flex flex-wrap gap-2">
                                 {[

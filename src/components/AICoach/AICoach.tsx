@@ -7,6 +7,7 @@ import { ChatMessage } from './ChatMessage';
 import { cn } from '../../lib/utils';
 
 import { useStore } from '../../hooks/useStore';
+import { useTranslation } from '../../hooks/useTranslation';
 import { buildSystemPrompt } from '../../lib/ai-context';
 import { format } from 'date-fns';
 
@@ -25,6 +26,7 @@ export function AICoach() {
 
     // Custom chat handler for client-side Gemini
     const { data, user, addHabit, addTodo, updateJournal, updateMetric } = useStore();
+    const { t } = useTranslation();
 
     // No localStorage - fresh session every time
     const [localMessages, setLocalMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([]);
@@ -214,7 +216,7 @@ export function AICoach() {
                                 <div className="h-full flex flex-col items-center justify-center text-center p-6 text-secondary space-y-3 opacity-60">
                                     <Bot size={48} className="text-accent/50 mb-2" />
                                     <p className="text-sm">Hi! I'm your personal AI coach.</p>
-                                    <p className="text-xs max-w-[200px]">Ask me to analyze your habits, suggest improvements, or just chat about your day!</p>
+                                    <p className="text-xs max-w-[200px]">{t('Ask me to analyze your habits, suggest improvements, or just chat about your day!')}</p>
                                 </div>
                             )}
 
