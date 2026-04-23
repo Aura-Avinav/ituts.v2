@@ -25,7 +25,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             {/* Flat Background */}
 
             {/* Mobile Header */}
-            <header className="md:hidden flex items-center justify-between p-4 border-b border-surfaceHighlight bg-surface sticky top-0 z-20">
+            <header className="md:hidden flex items-center justify-between p-4 border-b-2 border-primary bg-surface sticky top-0 z-20">
                 <div className="flex items-center gap-2 h-8">
                     <Logo className="h-full" />
                     <span className="font-bold text-lg">Ituts</span>
@@ -93,7 +93,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             )}
 
             {/* Desktop Sidebar */}
-            <aside className="w-64 border-r border-surfaceHighlight bg-surface hidden md:flex flex-col p-4 fixed h-full z-10">
+            <aside className="w-64 border-r-2 border-primary bg-surface hidden md:flex flex-col p-4 fixed h-full z-10">
                 <div className="flex items-center justify-start gap-3 mb-8 px-2 h-12">
                     <Logo className="h-full" />
                 </div>

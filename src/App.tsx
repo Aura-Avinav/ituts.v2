@@ -18,7 +18,6 @@ import { SplashScreen } from './components/ui/SplashScreen';
 import { AnimatePresence } from 'framer-motion';
 import { useDynamicFavicon } from './hooks/useDynamicFavicon';
 import { MoodSelector } from './components/MoodSelector';
-import { AICoach } from './components/AICoach/AICoach';
 
 type ViewState = 'dashboard' | 'journal' | 'achievements' | 'year' | 'settings';
 
@@ -240,7 +239,7 @@ function App() {
 
             {/* Section 1: Protocols (Habits) */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl relative overflow-hidden group">
+              <div className="bg-surface border-2 border-primary rounded-3xl p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <HabitGrid date={currentDate} key={`habit-grid-${currentDate.toISOString()}`} />
               </div>
@@ -248,24 +247,24 @@ function App() {
 
             {/* Section 1.5: Mood & Energy (New) */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl">
+              <div className="bg-surface border-2 border-primary rounded-3xl p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)]">
                 <MoodSelector date={currentDate} />
               </div>
             </section>
 
             {/* Section 2: Achievements & ToDo */}
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
+              <div className="bg-surface border-2 border-primary rounded-3xl p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] h-full min-h-[400px]">
                 <AchievementBoard date={currentDate} key={`achievements-${currentDate.toISOString()}`} />
               </div>
-              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl h-full min-h-[400px]">
+              <div className="bg-surface border-2 border-primary rounded-3xl p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)] h-full min-h-[400px]">
                 <TodoBoard />
               </div>
             </section>
 
             {/* Section 3: Metrics */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight rounded-3xl p-4 md:p-6 shadow-xl">
+              <div className="bg-surface border-2 border-primary rounded-3xl p-4 md:p-6 shadow-[4px_4px_0px_0px_rgba(17,17,17,1)]">
                 <MetricGraph date={currentDate} key={currentDate.toISOString()} />
               </div>
             </section>
@@ -284,7 +283,6 @@ function App() {
           </PageTransition>
         ) : null}
       </AnimatePresence>
-      <AICoach />
     </Layout>
   );
 }
