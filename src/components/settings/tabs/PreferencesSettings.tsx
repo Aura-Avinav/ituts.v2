@@ -3,6 +3,7 @@ import { useStore } from '../../../hooks/useStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '../../../lib/utils';
+import { t } from '../../../lib/i18n';
 
 export function PreferencesSettings() {
     const {
@@ -153,7 +154,7 @@ export function PreferencesSettings() {
                             <div className="p-1.5 rounded-md bg-accent/10 text-accent">
                                 <span className="w-4 h-4 rounded-full border-2 border-current block" />
                             </div>
-                            Personalize
+                            {t(draft.language || 'en-US', 'personalize')}
                         </h3>
                         <p className="text-xs text-secondary pl-9">Make it yours.</p>
                     </div>
@@ -354,7 +355,7 @@ export function PreferencesSettings() {
                             <h3 className="text-base font-medium text-foreground">Typography</h3>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4">
                             {/* Font Size */}
                             <div className="space-y-3">
                                 <label className="text-xs font-medium text-secondary uppercase tracking-wider">Font Size</label>
@@ -376,32 +377,6 @@ export function PreferencesSettings() {
                                             title={opt.label}
                                         >
                                             <span className={opt.size} style={{ fontWeight: 600 }}>{opt.icon}</span>
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Font Family */}
-                            <div className="space-y-3">
-                                <label className="text-xs font-medium text-secondary uppercase tracking-wider">Font Family</label>
-                                <div className="flex bg-surfaceHighlight/30 rounded-lg p-1">
-                                    {[
-                                        { value: 'sans', label: 'Sans', family: 'font-sans' },
-                                        { value: 'serif', label: 'Serif', family: 'font-serif' },
-                                        { value: 'mono', label: 'Mono', family: 'font-mono' },
-                                    ].map((opt) => (
-                                        <button
-                                            key={opt.value}
-                                            onClick={() => handleChange('fontFamily', opt.value)}
-                                            className={cn(
-                                                "flex-1 py-1.5 rounded-md transition-all text-xs font-medium",
-                                                draft.fontFamily === opt.value
-                                                    ? "bg-background shadow-sm text-foreground"
-                                                    : "text-secondary hover:text-foreground/80",
-                                                opt.family
-                                            )}
-                                        >
-                                            {opt.label}
                                         </button>
                                     ))}
                                 </div>

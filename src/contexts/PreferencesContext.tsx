@@ -60,6 +60,16 @@ const getInitialTheme = (): Theme => {
     return 'system'; // Default to system
 };
 
+const getInitialLanguage = (): Language => {
+    if (typeof window !== 'undefined') {
+        const navLang = navigator.language;
+        if (navLang.startsWith('en-GB')) return 'en-GB';
+        if (navLang.startsWith('en-IN')) return 'en-IN';
+        return 'en-US';
+    }
+    return 'en-US';
+};
+
 const PreferencesContext = createContext<PreferencesContextType | undefined>(undefined);
 
 export function PreferencesProvider({ children }: { children: ReactNode }) {
@@ -79,7 +89,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         return {
             theme: getInitialTheme(),
             reducedMotion: false,
-            language: 'en-US',
+            language: getInitialLanguage(),
             spellCheck: true,
             dateFormat: 'MM/DD/YYYY',
             timeFormat: '12',
