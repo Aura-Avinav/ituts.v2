@@ -44,10 +44,12 @@ export function SettingsView({ onBack }: { onBack: () => void }) {
             {/* Content Area - Split View */}
             <div className="flex flex-col md:flex-row gap-8 flex-1">
                 {/* Sidebar */}
-                <SettingsSidebar activeTab={activeTab} onTabChange={setActiveTab} />
+                <div className="bg-surface border border-primary/5 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] shrink-0 h-max">
+                    <SettingsSidebar activeTab={activeTab} onTabChange={setActiveTab} />
+                </div>
 
                 {/* Main Content */}
-                <div className="flex-1 min-w-0 pb-20">
+                <div className="flex-1 min-w-0 pb-20 bg-surface border border-primary/5 rounded-3xl p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
                     {renderContent()}
                 </div>
             </div>

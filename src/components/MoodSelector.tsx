@@ -112,9 +112,8 @@ export function MoodSelector({ date }: { date: Date }) {
                     </AnimatePresence>
                 </div>
 
-                <div className="relative h-14 bg-surface/30 rounded-xl border border-surfaceHighlight flex items-center px-2 overflow-hidden group">
-                    {/* Interactive Slider Area */}
-                    <div className="absolute inset-0 z-20 grid grid-cols-10 cursor-pointer">
+                <div className="relative h-14 bg-surface/30 rounded-xl border border-surfaceHighlight flex items-center px-2 group">
+                    <div className="absolute inset-0 z-20 grid grid-cols-10 cursor-pointer overflow-hidden rounded-xl">
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(v => (
                             <div
                                 key={v}

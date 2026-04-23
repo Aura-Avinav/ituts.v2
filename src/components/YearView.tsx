@@ -94,7 +94,7 @@ export function YearView({ onSelectMonth }: YearViewProps) {
                             console.log("Month selected:", monthDate);
                             onSelectMonth(monthDate);
                         }}
-                        className="w-full text-left bg-surface/30 backdrop-blur-sm border border-surfaceHighlight rounded-xl p-6 hover:bg-surfaceHighlight/10 transition-colors group cursor-pointer"
+                        className="w-full text-left bg-surface border border-primary/5 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
                     >
                         <h3 className="text-2xl font-serif font-bold text-primary mb-2 group-hover:text-accent transition-colors">
                             {format(monthDate, 'MMMM')}

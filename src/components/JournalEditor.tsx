@@ -57,7 +57,7 @@ export function JournalEditor() {
         )}>
             {/* Sidebar: Date Picker / List */}
             <div className={cn(
-                "w-full md:w-64 bg-surface/30 border border-surfaceHighlight rounded-xl flex flex-col p-4 shrink-0 transition-all duration-500",
+                "w-full md:w-64 bg-surface border border-primary/5 rounded-3xl p-4 shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col shrink-0 transition-all duration-500",
                 isFocusMode ? "hidden" : ""
             )}>
                 <div className="mb-6 space-y-4">
@@ -112,8 +112,8 @@ export function JournalEditor() {
             </div>
 
             {/* Main Editor */}
-            <div className="flex-1 bg-surface/30 border border-surfaceHighlight rounded-xl flex flex-col relative overflow-hidden focus-within:ring-1 focus-within:ring-accent/50 transition-all">
-                <div className="p-4 border-b border-surfaceHighlight flex items-center justify-between bg-surface/50">
+            <div className="flex-1 bg-surface border border-primary/5 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col relative overflow-hidden focus-within:ring-1 focus-within:ring-accent/50 transition-all">
+                <div className="p-4 md:px-6 border-b border-surfaceHighlight flex items-center justify-between bg-transparent">
                     <span className="text-secondary text-sm">
                         Journaling - <span className="text-primary font-bold">{formattedDate}</span>
                     </span>
