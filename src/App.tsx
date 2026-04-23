@@ -86,17 +86,9 @@ function App() {
     );
   }
 
-  // 2. Show Landing Page or Auth Page if no user
+  // 2. Show Auth Page directly if no user
   if (!user) {
-    if (showAuth) {
-      return <AuthPage initialMode={authMode} onBack={() => setShowAuth(false)} />;
-    }
-    return (
-      <LandingPage 
-        onSignIn={() => { setAuthMode('signin'); setShowAuth(true); }}
-        onSignUp={() => { setAuthMode('signup'); setShowAuth(true); }}
-      />
-    );
+    return <AuthPage initialMode="signin" />;
   }
 
   // 3. Show Loading if data is loading (but user is authed)
