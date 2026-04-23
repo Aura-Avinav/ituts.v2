@@ -191,6 +191,35 @@ export function PreferencesSettings() {
                             </div>
                         </div>
 
+                        {/* Typography */}
+                        <div className="space-y-3">
+                            <label className="text-sm font-medium text-secondary flex items-center gap-2">
+                                <Type className="w-3.5 h-3.5" /> Typography (Body)
+                            </label>
+                            <div className="flex gap-2">
+                                {[
+                                    { id: 'sans', label: 'Montserrat', font: 'font-sans' },
+                                    { id: 'serif', label: 'Playfair', font: 'font-serif' },
+                                    { id: 'mono', label: 'SF Mono', font: 'font-mono' }
+                                ].map((f) => (
+                                    <button
+                                        key={f.id}
+                                        onClick={() => handleChange('fontFamily', f.id)}
+                                        className={cn(
+                                            "flex-1 py-2 px-3 rounded-xl border text-sm transition-all",
+                                            f.font,
+                                            draft.fontFamily === f.id
+                                                ? "border-accent bg-accent/5 text-accent font-medium shadow-sm"
+                                                : "border-surfaceHighlight/50 bg-surface hover:bg-surfaceHighlight/30 text-secondary"
+                                        )}
+                                    >
+                                        {f.label}
+                                    </button>
+                                ))}
+                            </div>
+                            <p className="text-xs text-secondary/70 italic">*Note: Headers will always remain in elegant Serif.</p>
+                        </div>
+
                         {/* Sound Effects */}
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-secondary flex items-center gap-2">

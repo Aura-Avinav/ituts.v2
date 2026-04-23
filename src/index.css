@@ -50,6 +50,15 @@
     --font-ui: var(--font-stack-sans);
   }
 
+  /* Dynamic Font Family */
+  :root[data-font-family="sans"] { --font-ui: var(--font-stack-sans); }
+  :root[data-font-family="serif"] { --font-ui: var(--font-stack-serif); }
+  :root[data-font-family="mono"] { --font-ui: var(--font-stack-mono); }
+
+  body {
+    font-family: var(--font-ui);
+  }
+
   /* Dynamic Accent Colors (Psychologically Attractive) */
   :root[data-accent="blue"] { --accent: 58 134 255; } /* #3A86FF - Electric Blue */
   :root[data-accent="purple"] { --accent: 131 56 236; } /* #8338EC - Deep Violet */
