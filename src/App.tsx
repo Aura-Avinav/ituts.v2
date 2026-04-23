@@ -243,7 +243,7 @@ function App() {
 
             {/* Section 1: Protocols (Habits) */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight/30 rounded-3xl p-4 md:p-6 shadow-sm relative overflow-hidden group">
+              <div className="bg-surface border border-primary/5 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <HabitGrid date={currentDate} key={`habit-grid-${currentDate.toISOString()}`} />
               </div>
@@ -251,24 +251,24 @@ function App() {
 
             {/* Section 1.5: Mood & Energy (New) */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight/30 rounded-3xl p-4 md:p-6 shadow-sm">
+              <div className="bg-surface border border-primary/5 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
                 <MoodSelector date={currentDate} />
               </div>
             </section>
 
             {/* Section 2: Achievements & ToDo */}
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="bg-surface border border-surfaceHighlight/30 rounded-3xl p-4 md:p-6 shadow-sm h-full min-h-[400px]">
+              <div className="bg-surface border border-primary/5 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] h-full min-h-[400px]">
                 <AchievementBoard date={currentDate} key={`achievements-${currentDate.toISOString()}`} />
               </div>
-              <div className="bg-surface border border-surfaceHighlight/30 rounded-3xl p-4 md:p-6 shadow-sm h-full min-h-[400px]">
+              <div className="bg-surface border border-primary/5 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] h-full min-h-[400px]">
                 <TodoBoard />
               </div>
             </section>
 
             {/* Section 3: Metrics */}
             <section>
-              <div className="bg-surface border border-surfaceHighlight/30 rounded-3xl p-4 md:p-6 shadow-sm">
+              <div className="bg-surface border border-primary/5 rounded-3xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)]">
                 <MetricGraph date={currentDate} key={currentDate.toISOString()} />
               </div>
             </section>
