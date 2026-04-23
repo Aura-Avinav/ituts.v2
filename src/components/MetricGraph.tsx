@@ -28,7 +28,7 @@ export function MetricGraph({ date }: { date: Date }) {
     });
 
     return (
-        <div className="h-full flex flex-col bg-[#F4F4E4] -m-4 md:-m-6 p-4 md:p-6 rounded-3xl">
+        <div className="h-full flex flex-col">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
                 <h3 className="text-lg font-semibold flex items-center gap-2 text-foreground">
                     <Activity className="w-5 h-5" style={{ color: activeColor }} />
