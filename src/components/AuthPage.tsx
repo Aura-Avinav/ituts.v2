@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase';
 import { Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 import { ArrowLeft } from 'lucide-react';
+import { Logo } from './ui/Logo';
 
 interface AuthPageProps {
     initialMode?: 'signin' | 'signup';
@@ -58,8 +59,8 @@ export function AuthPage({ initialMode = 'signin', onBack }: AuthPageProps) {
                             <ArrowLeft className="w-6 h-6" />
                         </button>
                     )}
-                    <div className="flex justify-center mb-6">
-                        <img src="/ituts-logo.png" alt="Logo" className="h-16 w-auto" />
+                    <div className="flex justify-center mb-6 h-16">
+                        <Logo className="h-full w-auto" />
                     </div>
                     <h1 className="text-4xl md:text-5xl font-serif font-bold tracking-tight text-primary">
                         {mode === 'signin' ? 'Welcome Back' : 'Create Account'}
