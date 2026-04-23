@@ -235,7 +235,7 @@ export function PreferencesSettings() {
                                 <select
                                     value={draft.language || 'en-US'}
                                     onChange={(e) => handleChange('language', e.target.value)}
-                                    className="w-full p-2.5 bg-transparent hover:bg-surfaceHighlight/30 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer appearance-none pl-3"
+                                    className="w-full p-2.5 bg-surface hover:bg-surfaceHighlight/30 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all cursor-pointer appearance-none pl-3 shadow-sm border border-surfaceHighlight/20"
                                 >
                                     <option value="en-US">English (US)</option>
                                     <option value="en-GB">English (UK)</option>

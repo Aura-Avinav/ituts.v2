@@ -25,7 +25,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             {/* Flat Background */}
 
             {/* Mobile Header */}
-            <header className="md:hidden flex items-center justify-between p-4 border-b-2 border-primary bg-background sticky top-0 z-20">
+            <header className="md:hidden flex items-center justify-between p-4 border-b border-surfaceHighlight/50 bg-background sticky top-0 z-20">
                 <div className="flex items-center gap-2 h-8">
                     <Logo className="h-full" />
                     <span className="font-bold text-lg">Ituts</span>
@@ -93,7 +93,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             )}
 
             {/* Desktop Sidebar */}
-            <aside className="w-64 border-r-2 border-primary bg-background hidden md:flex flex-col p-4 fixed h-full z-10">
+            <aside className="w-64 border-r border-surfaceHighlight/50 bg-background hidden md:flex flex-col p-4 fixed h-full z-10">
                 <div className="flex items-center justify-start gap-3 mb-8 px-2 h-12">
                     <Logo className="h-full" />
                 </div>
@@ -153,10 +153,10 @@ function NavItem({ icon, label, active, onClick }: { icon: React.ReactNode, labe
         <button
             onClick={onClick}
             className={cn(
-                "w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 group",
+                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-medium",
                 active
-                    ? "bg-accent text-primary font-bold border border-primary shadow-[2px_2px_0px_0px_rgba(17,17,17,1)]"
-                    : "text-secondary hover:bg-surfaceHighlight/50 hover:text-primary"
+                    ? "bg-accent text-white shadow-sm"
+                    : "text-secondary hover:bg-surfaceHighlight/30 hover:text-foreground"
             )}>
             <div className="w-5 h-5 flex-shrink-0 group-hover:scale-110 transition-transform">{icon}</div>
             <span className="font-medium">{label}</span>
