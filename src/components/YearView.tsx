@@ -105,7 +105,10 @@ export function YearView({ onSelectMonth }: YearViewProps) {
                         {/* Placeholder for future summary stats */}
                         <div className="mt-4 flex gap-2">
                             <div className="h-1.5 w-full bg-surfaceHighlight/30 rounded-full overflow-hidden">
-                                <div className="h-full bg-accent/50 w-0 group-hover:w-full transition-all duration-1000" />
+                                <div 
+                                    className="h-full w-0 group-hover:w-full transition-all duration-1000" 
+                                    style={{ background: `linear-gradient(to right, rgb(var(--accent)), #8338EC)` }} 
+                                />
                             </div>
                         </div>
                     </button>
