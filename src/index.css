@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --background: 244 244 228; /* #F4F4E4 - The undeniable deep cream color */
-    --surface: 244 244 228; /* #F4F4E4 - Matches background perfectly */
+    --background: 236 233 222; /* #ECE9DE - A distinct, deep creamy beige */
+    --surface: 247 245 238; /* #F7F5EE - A lighter cream for cards to pop against the background */
     --surface-highlight: 215 215 205; /* Slightly darker for borders */
     --primary: 17 17 17; /* #111111 - Dark text for high contrast */
     --primary-foreground: 255 255 255; /* White text on primary buttons */
     --secondary: 100 100 100; /* Medium gray */
     --success: 34 197 94;
     --danger: 239 68 68;
-    --card: 244 244 228;
+    --card: 247 245 238;
     --card-foreground: 17 17 17;
     --accent: 255 107 107; /* #FF6B6B - Vibrant Coral for attractive psychological pop */
   }
