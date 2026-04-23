@@ -58,7 +58,12 @@ export function MoodSelector({ date }: { date: Date }) {
                                 {isSelected && (
                                     <motion.div
                                         layoutId="mood-active-bg"
-                                        className={cn("absolute inset-0 rounded-xl z-[-1]", m.color.split(' ')[0], "opacity-100")}
+                                        className={cn(
+                                            "absolute inset-0 rounded-xl z-[-1]", 
+                                            m.color.split(' ')[0], 
+                                            "dark:!bg-accent/20 border border-transparent dark:border-accent/30",
+                                            "opacity-100"
+                                        )}
                                         initial={false}
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
@@ -78,7 +83,9 @@ export function MoodSelector({ date }: { date: Date }) {
 
                                 <span className={cn(
                                     "text-[10px] font-medium transition-colors duration-200",
-                                    isSelected ? m.color.split(' ')[1] : "text-secondary group-hover:text-foreground"
+                                    isSelected 
+                                        ? cn(m.color.split(' ')[1], "dark:!text-accent")
+                                        : "text-secondary group-hover:text-foreground"
                                 )}>
                                     {m.label}
                                 </span>
