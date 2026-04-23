@@ -99,7 +99,7 @@ export function HabitGrid({ date }: { date: Date }) {
                 <table className="w-full text-sm text-left border-separate border-spacing-0">
                     <thead className="text-xs uppercase text-secondary">
                         <tr>
-                            <th scope="col" className="sticky left-0 z-20 px-4 py-3 bg-surface/95 backdrop-blur-md min-w-[200px] font-semibold text-primary/80 border-b border-surfaceHighlight/20">
+                            <th scope="col" className="sticky left-0 z-20 px-4 py-3 bg-surface min-w-[200px] font-semibold text-primary/80 border-b border-surfaceHighlight/20">
                                 Habit
                             </th>
                             {days.map(d => (
@@ -124,7 +124,7 @@ export function HabitGrid({ date }: { date: Date }) {
                                         exit={{ opacity: 0, x: 20 }}
                                         className="group hover:bg-surfaceHighlight/5 transition-colors"
                                     >
-                                        <th scope="row" className="sticky left-0 z-20 px-4 py-3 font-medium text-primary bg-surface/95 backdrop-blur-md whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] border-b border-surfaceHighlight/10">
+                                        <th scope="row" className="sticky left-0 z-20 px-4 py-3 font-medium text-primary bg-surface whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px] border-b border-surfaceHighlight/10">
                                             <div className="flex items-center justify-between gap-2">
                                                 <button
                                                     onClick={() => setSelectedHabitId(habit.id)}
