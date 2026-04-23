@@ -1,5 +1,5 @@
 import { usePreferences } from '../contexts/PreferencesContext';
-import { getTranslation } from './i18n';
+import { getTranslation } from '../lib/i18n';
 
 export function useTranslation() {
     const { preferences } = usePreferences();
