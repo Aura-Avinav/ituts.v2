@@ -25,17 +25,25 @@ function App() {
   useDynamicFavicon();
   const [view, setView] = useState<ViewState>(() => {
     if (typeof window !== 'undefined') {
-      // 1. Check for specific "Start View" preference first
-      try {
-        const prefs = JSON.parse(localStorage.getItem('ituts_preferences_v1') || '{}');
-        if (prefs.startView && prefs.startView !== 'dashboard') {
-          return prefs.startView;
-        }
-      } catch (e) { /* ignore */ }
-
-      // 2. Fallback to "Last Open View"
-      const savedView = localStorage.getItem('journal_current_view');
-      return (savedView as ViewState) || 'dashboard';
+      const isNewSession = !sessionStorage.getItem('ituts_session_started');
+      
+      if (isNewSession) {
+        // Mark session as started
+        sessionStorage.setItem('ituts_session_started', 'true');
+        
+        // 1. New Session: Use User's Default Page Preference
+        try {
+          const prefs = JSON.parse(localStorage.getItem('ituts_preferences_v1') || '{}');
+          if (prefs.startView) {
+            return prefs.startView;
+          }
+        } catch (e) { /* ignore */ }
+        return 'dashboard'; // Default if no preference
+      } else {
+        // 2. Existing Session (Refresh): Restore Last Open View
+        const savedView = localStorage.getItem('journal_current_view');
+        return (savedView as ViewState) || 'dashboard';
+      }
     }
     return 'dashboard';
   });
@@ -67,19 +75,7 @@ function App() {
     return () => clearInterval(timer);
   }, [currentDate]);
 
-  // Handle Startup View Preference (Once per session/load)
-  useEffect(() => {
-    if (user && data.preferences?.startView) {
-      const prefView = data.preferences.startView;
-      if (view === 'dashboard' && prefView !== 'dashboard') {
-        const hasRedirected = sessionStorage.getItem('ituts_start_redirect');
-        if (!hasRedirected) {
-          setView(prefView);
-          sessionStorage.setItem('ituts_start_redirect', 'true');
-        }
-      }
-    }
-  }, [user, data.preferences?.startView, view]);
+
 
   // 1. Show Splash Screen while checking auth
   if (authLoading) {
