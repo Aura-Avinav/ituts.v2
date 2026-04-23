@@ -23,6 +23,7 @@ export function MoodSelector({ date }: { date: Date }) {
 
     const [mood, setMood] = useState<number | null>(existingMood?.value || null);
     const [energy, setEnergy] = useState<number | null>(existingEnergy?.value || null);
+    const [isDragging, setIsDragging] = useState(false);
 
     // Sync specific day selection
     useEffect(() => {
@@ -41,6 +42,12 @@ export function MoodSelector({ date }: { date: Date }) {
         setEnergy(value);
         updateMetric(dateStr, 'energy', value);
     };
+
+    useEffect(() => {
+        const handleGlobalUp = () => setIsDragging(false);
+        window.addEventListener('pointerup', handleGlobalUp);
+        return () => window.removeEventListener('pointerup', handleGlobalUp);
+    }, []);
 
     return (
         <div className="flex flex-col gap-6">
@@ -113,12 +120,22 @@ export function MoodSelector({ date }: { date: Date }) {
                 </div>
 
                 <div className="relative h-14 bg-surface/30 rounded-xl border border-surfaceHighlight flex items-center px-2 group">
-                    <div className="absolute inset-0 z-20 grid grid-cols-10 cursor-pointer overflow-hidden rounded-xl">
+                    <div 
+                        className="absolute inset-0 z-20 grid grid-cols-10 cursor-pointer overflow-hidden rounded-xl touch-none"
+                        onPointerLeave={() => setIsDragging(false)}
+                    >
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(v => (
                             <div
                                 key={v}
-                                onClick={() => handleEnergySelect(v)}
-                                className="h-full hover:bg-white/5 transition-colors"
+                                onPointerDown={(e) => {
+                                    e.currentTarget.releasePointerCapture(e.pointerId); // Prevent capturing to allow enter events on siblings
+                                    setIsDragging(true);
+                                    handleEnergySelect(v);
+                                }}
+                                onPointerEnter={() => {
+                                    if (isDragging) handleEnergySelect(v);
+                                }}
+                                className="h-full hover:bg-white/5 transition-colors touch-none"
                                 title={`Energy: ${v}/10`}
                             />
                         ))}
