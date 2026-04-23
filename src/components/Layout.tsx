@@ -25,7 +25,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             {/* Flat Background */}
 
             {/* Mobile Header */}
-            <header className="md:hidden flex items-center justify-between p-4 border-b-2 border-primary bg-surface sticky top-0 z-20">
+            <header className="md:hidden flex items-center justify-between p-4 border-b-2 border-primary bg-background sticky top-0 z-20">
                 <div className="flex items-center gap-2 h-8">
                     <Logo className="h-full" />
                     <span className="font-bold text-lg">Ituts</span>
@@ -48,7 +48,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
                     />
 
                     {/* Drawer Content */}
-                    <aside className="absolute right-0 top-0 bottom-0 w-3/4 max-w-sm bg-surface border-l border-surfaceHighlight p-6 shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
+                    <aside className="absolute right-0 top-0 bottom-0 w-3/4 max-w-sm bg-background border-l border-surfaceHighlight p-6 shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
                         <div className="flex justify-end mb-8">
                             <button
                                 onClick={() => setIsMobileMenuOpen(false)}
@@ -93,7 +93,7 @@ export function Layout({ children, currentView, onNavigate, currentDate = new Da
             )}
 
             {/* Desktop Sidebar */}
-            <aside className="w-64 border-r-2 border-primary bg-surface hidden md:flex flex-col p-4 fixed h-full z-10">
+            <aside className="w-64 border-r-2 border-primary bg-background hidden md:flex flex-col p-4 fixed h-full z-10">
                 <div className="flex items-center justify-start gap-3 mb-8 px-2 h-12">
                     <Logo className="h-full" />
                 </div>

@@ -35,10 +35,14 @@
     @apply bg-background text-primary antialiased;
   }
 
+  h1, h2, h3, h4, h5, h6, strong, b, .font-bold {
+    font-family: var(--font-stack-serif);
+  }
+
   /* Typography Settings */
   :root {
     /* Font Stacks */
-    --font-stack-sans: "Inter", "Satoshi", "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-stack-sans: "Montserrat", "Inter", "Satoshi", "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-stack-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     --font-stack-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
