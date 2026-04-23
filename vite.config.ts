@@ -12,5 +12,17 @@ export default defineConfig({
         secure: false,
       }
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'ui-vendor': ['framer-motion', 'lucide-react', 'recharts'],
+          'data-vendor': ['@supabase/supabase-js', 'date-fns'],
+          'ai-vendor': ['@google/generative-ai', 'ai']
+        }
+      }
+    }
   }
 })

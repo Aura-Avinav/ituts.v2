@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { Layout } from './components/Layout';
 import { AuthPage } from './components/AuthPage';
 
-import { HabitGrid } from './components/HabitGrid';
-import { AchievementBoard } from './components/AchievementBoard';
-import { TodoBoard } from './components/TodoBoard';
-import { JournalEditor } from './components/JournalEditor';
-import { MetricGraph } from './components/MetricGraph';
-import { YearView } from './components/YearView';
-import { SettingsView } from './components/SettingsView';
+const HabitGrid = lazy(() => import('./components/HabitGrid').then(module => ({ default: module.HabitGrid })));
+const AchievementBoard = lazy(() => import('./components/AchievementBoard').then(module => ({ default: module.AchievementBoard })));
+const TodoBoard = lazy(() => import('./components/TodoBoard').then(module => ({ default: module.TodoBoard })));
+const JournalEditor = lazy(() => import('./components/JournalEditor').then(module => ({ default: module.JournalEditor })));
+const MetricGraph = lazy(() => import('./components/MetricGraph').then(module => ({ default: module.MetricGraph })));
+const YearView = lazy(() => import('./components/YearView').then(module => ({ default: module.YearView })));
+const SettingsView = lazy(() => import('./components/SettingsView').then(module => ({ default: module.SettingsView })));
 import { getDaysInMonth, differenceInCalendarDays, startOfYear, endOfYear, format } from 'date-fns';
 import { useStore } from './hooks/useStore';
 
@@ -172,8 +172,9 @@ function App() {
 
   return (
     <Layout currentView={view} onNavigate={setView} currentDate={currentDate}>
-      <AnimatePresence mode="wait">
-        {view === 'dashboard' ? (
+      <Suspense fallback={<Loading />}>
+        <AnimatePresence mode="wait">
+          {view === 'dashboard' ? (
           <PageTransition key="dashboard" className="space-y-8 pb-10">
             <header className="flex flex-col gap-6 md:flex-row md:items-end justify-between border-b border-surfaceHighlight pb-6">
               <div className="space-y-4 flex-1">
@@ -273,7 +274,8 @@ function App() {
             <SettingsView onBack={() => setView('dashboard')} />
           </PageTransition>
         ) : null}
-      </AnimatePresence>
+        </AnimatePresence>
+      </Suspense>
     </Layout>
   );
 }
