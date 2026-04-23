@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Layout } from './components/Layout';
 import { AuthPage } from './components/AuthPage';
+import { LandingPage } from './components/LandingPage';
 import { HabitGrid } from './components/HabitGrid';
 import { AchievementBoard } from './components/AchievementBoard';
 import { TodoBoard } from './components/TodoBoard';
@@ -50,6 +51,9 @@ function App() {
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const { data, user, authLoading } = useStore();
+  
+  const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
 
   // Midnight Reset Logic: Check every minute if the day has changed
   useEffect(() => {
@@ -87,9 +91,17 @@ function App() {
     );
   }
 
-  // 2. Show Auth Page if no user
+  // 2. Show Landing Page or Auth Page if no user
   if (!user) {
-    return <AuthPage />;
+    if (showAuth) {
+      return <AuthPage initialMode={authMode} onBack={() => setShowAuth(false)} />;
+    }
+    return (
+      <LandingPage 
+        onSignIn={() => { setAuthMode('signin'); setShowAuth(true); }}
+        onSignUp={() => { setAuthMode('signup'); setShowAuth(true); }}
+      />
+    );
   }
 
   // 3. Show Loading if data is loading (but user is authed)

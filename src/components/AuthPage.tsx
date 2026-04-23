@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 
-export function AuthPage() {
+import { ArrowLeft } from 'lucide-react';
+
+interface AuthPageProps {
+    initialMode?: 'signin' | 'signup';
+    onBack?: () => void;
+}
+
+export function AuthPage({ initialMode = 'signin', onBack }: AuthPageProps) {
     const [isLoading, setIsLoading] = useState(false);
-    const [mode, setMode] = useState<'signin' | 'signup'>('signin');
+    const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState<{ type: 'error' | 'success', text: string } | null>(null);
@@ -42,7 +49,15 @@ export function AuthPage() {
     return (
         <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
             <div className="w-full max-w-md space-y-8 animate-in fade-in zoom-in duration-500">
-                <div className="text-center space-y-2">
+                <div className="text-center space-y-2 relative">
+                    {onBack && (
+                        <button 
+                            onClick={onBack}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-secondary hover:text-primary transition-colors"
+                        >
+                            <ArrowLeft className="w-6 h-6" />
+                        </button>
+                    )}
                     <div className="flex justify-center mb-6">
                         <img src="/ituts-logo.png" alt="Logo" className="h-16 w-auto" />
                     </div>
