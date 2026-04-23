@@ -6,19 +6,9 @@ import { format, eachDayOfInterval } from 'date-fns';
 
 export function MetricGraph({ date }: { date: Date }) {
     const { data } = useStore();
-    // Default to 'blue' (indigo) if not set, or map preferences
-    const accent = data.preferences?.accentColor || 'blue';
-
-    const colorMap: Record<string, string> = {
-        blue: '#6366f1',   // Indigo-500
-        purple: '#a855f7', // Purple-500
-        rose: '#f43f5e',   // Rose-500
-        orange: '#f97316', // Orange-500
-        green: '#22c55e',  // Green-500
-        cyan: '#06b6d4',   // Cyan-500
-    };
-
-    const activeColor = colorMap[accent] || '#6366f1';
+    // Psychologically attractive energetic coral/purple gradient feel
+    const activeColor = '#FF6B6B'; 
+    const secondaryColor = '#8338EC';
 
     const currentMonthStr = format(date, 'yyyy-MM');
 
@@ -28,7 +18,7 @@ export function MetricGraph({ date }: { date: Date }) {
     });
 
     return (
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col bg-[#F4F4E4] -m-4 md:-m-6 p-4 md:p-6 rounded-3xl">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-2">
                 <h3 className="text-lg font-semibold flex items-center gap-2 text-foreground">
                     <Activity className="w-5 h-5" style={{ color: activeColor }} />
@@ -44,8 +34,8 @@ export function MetricGraph({ date }: { date: Date }) {
                     <AreaChart data={getChartData(data, date, activeHabits)}>
                         <defs>
                             <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor={activeColor} stopOpacity={0.4} />
-                                <stop offset="95%" stopColor={activeColor} stopOpacity={0} />
+                                <stop offset="5%" stopColor={activeColor} stopOpacity={0.6} />
+                                <stop offset="95%" stopColor={secondaryColor} stopOpacity={0.1} />
                             </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />

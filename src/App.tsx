@@ -217,7 +217,7 @@ function App() {
                     </div>
                     <div className="h-2 w-full bg-surfaceHighlight rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 shadow-[0_0_10px_rgba(59,130,246,0.5)] transition-all duration-1000 ease-out"
+                        className="h-full bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 shadow-[0_0_10px_rgba(244,63,94,0.5)] transition-all duration-1000 ease-out"
                         style={{ width: `${progress.monthly}%` }}
                       />
                     </div>
