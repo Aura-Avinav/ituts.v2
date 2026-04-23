@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    --background: 235 232 216; /* #EBE8D8 - Rich, warm beige background */
-    --surface: 244 244 228; /* #F4F4E4 - The creamy shade the user praised for the cards */
-    --surface-highlight: 215 215 205; /* Slightly darker for borders */
+    --background: 242 235 208; /* Warmer by 10%: Beautiful rich warm cream */
+    --surface: 233 232 224; /* Calmer EBE8D8: Soft, sophisticated calm cream for cards */
+    --surface-highlight: 215 210 195; /* Slightly darker for elegant borders */
     --primary: 17 17 17; /* #111111 - Dark text for high contrast */
     --primary-foreground: 255 255 255; /* White text on primary buttons */
     --secondary: 100 100 100; /* Medium gray */
     --success: 34 197 94;
     --danger: 239 68 68;
-    --card: 244 244 228;
+    --card: 233 232 224;
     --card-foreground: 17 17 17;
     --accent: 255 107 107; /* #FF6B6B - Vibrant Coral for attractive psychological pop */
   }
