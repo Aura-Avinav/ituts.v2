@@ -47,19 +47,7 @@ export function WorkspaceSettings() {
                     />
                 </div>
 
-                {/* Analytics Toggle (Mock) */}
-                <div className="flex items-center justify-between py-4">
-                    <div className="pr-8">
-                        <div className="font-medium text-foreground text-sm">Analytics</div>
-                        <p className="text-xs text-secondary mt-0.5">
-                            Save and display page view analytics.
-                        </p>
-                    </div>
-                    {/* Simple Toggle Switch Mockup */}
-                    <div className="w-10 h-6 bg-surfaceHighlight rounded-full relative cursor-not-allowed opacity-50">
-                        <div className="absolute left-1 top-1 w-4 h-4 bg-secondary/50 rounded-full shadow-sm"></div>
-                    </div>
-                </div>
+
 
                 {/* Export Content */}
                 <div className="flex items-center justify-between py-4">
