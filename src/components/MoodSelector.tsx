@@ -23,6 +23,8 @@ export function MoodSelector({ date }: { date: Date }) {
 
     const [mood, setMood] = useState<number | null>(existingMood?.value || null);
     const [energy, setEnergy] = useState<number | null>(existingEnergy?.value || null);
+    // Sync specific day selection
+    useEffect(() => {
         const foundMood = data.metrics.find(m => m.date === dateStr && m.label === 'mood');
         const foundEnergy = data.metrics.find(m => m.date === dateStr && m.label === 'energy');
         setMood(foundMood?.value || null);
