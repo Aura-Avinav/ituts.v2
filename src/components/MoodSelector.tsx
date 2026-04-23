@@ -23,10 +23,6 @@ export function MoodSelector({ date }: { date: Date }) {
 
     const [mood, setMood] = useState<number | null>(existingMood?.value || null);
     const [energy, setEnergy] = useState<number | null>(existingEnergy?.value || null);
-    const [isDragging, setIsDragging] = useState(false);
-
-    // Sync specific day selection
-    useEffect(() => {
         const foundMood = data.metrics.find(m => m.date === dateStr && m.label === 'mood');
         const foundEnergy = data.metrics.find(m => m.date === dateStr && m.label === 'energy');
         setMood(foundMood?.value || null);
@@ -42,12 +38,6 @@ export function MoodSelector({ date }: { date: Date }) {
         setEnergy(value);
         updateMetric(dateStr, 'energy', value);
     };
-
-    useEffect(() => {
-        const handleGlobalUp = () => setIsDragging(false);
-        window.addEventListener('pointerup', handleGlobalUp);
-        return () => window.removeEventListener('pointerup', handleGlobalUp);
-    }, []);
 
     return (
         <div className="flex flex-col gap-6">
@@ -119,33 +109,23 @@ export function MoodSelector({ date }: { date: Date }) {
                     </AnimatePresence>
                 </div>
 
-                <div className="relative h-14 bg-surface/30 rounded-xl border border-surfaceHighlight flex items-center px-2 group">
-                    <div 
-                        className="absolute inset-0 z-20 grid grid-cols-10 cursor-pointer overflow-hidden rounded-xl touch-none"
-                        onPointerLeave={() => setIsDragging(false)}
-                    >
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(v => (
-                            <div
-                                key={v}
-                                onPointerDown={(e) => {
-                                    e.currentTarget.releasePointerCapture(e.pointerId); // Prevent capturing to allow enter events on siblings
-                                    setIsDragging(true);
-                                    handleEnergySelect(v);
-                                }}
-                                onPointerEnter={() => {
-                                    if (isDragging) handleEnergySelect(v);
-                                }}
-                                className="h-full hover:bg-white/5 transition-colors touch-none"
-                                title={`Energy: ${v}/10`}
-                            />
-                        ))}
-                    </div>
+                <div className="relative h-14 bg-surface/30 rounded-xl border border-surfaceHighlight flex items-center px-4 group overflow-hidden">
+                    {/* Native Range Input for perfect dragging */}
+                    <input 
+                        type="range"
+                        min="0"
+                        max="10"
+                        step="1"
+                        value={energy || 0}
+                        onChange={(e) => handleEnergySelect(parseInt(e.target.value))}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-30 touch-none"
+                    />
 
                     {/* Background Track */}
-                    <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 bg-surfaceHighlight/50 rounded-full overflow-hidden"></div>
+                    <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-2 bg-surfaceHighlight/50 rounded-full overflow-hidden"></div>
 
                     {/* Animated Fill Bar */}
-                    <div className="absolute left-2 right-2 top-1/2 -translate-y-1/2 h-2 rounded-full pointer-events-none">
+                    <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-2 rounded-full pointer-events-none">
                         <motion.div
                             layout
                             className={cn(
@@ -162,29 +142,31 @@ export function MoodSelector({ date }: { date: Date }) {
                         />
                     </div>
 
-                    {/* Floating Battery Icon Indicator */}
-                    <motion.div
-                        className="absolute top-1/2 -translate-y-1/2 z-10 pointer-events-none"
-                        animate={{
-                            left: `calc(${(energy || 0) * 10}% - 14px)`,
-                            opacity: energy ? 1 : 0.5
-                        }}
-                        transition={{ type: "spring", stiffness: 150, damping: 20 }}
-                    >
-                        <div className={cn(
-                            "w-8 h-8 rounded-full flex items-center justify-center bg-background border shadow-lg",
-                            !energy ? "border-surfaceHighlight text-secondary" :
-                                energy >= 8 ? "border-green-500/50 text-green-500" :
-                                    energy >= 5 ? "border-yellow-500/50 text-yellow-500" :
-                                        "border-red-500/50 text-red-500"
-                        )}>
-                            {energy === null ? <Battery className="w-4 h-4 opacity-50" /> :
-                                energy >= 8 ? <BatteryFull className="w-4 h-4 fill-current" /> :
-                                    energy >= 4 ? <BatteryMedium className="w-4 h-4 fill-current" /> :
-                                        <BatteryLow className="w-4 h-4 fill-current" />
-                            }
-                        </div>
-                    </motion.div>
+                    {/* Floating Battery Icon Indicator attached to the width of the progress */}
+                    <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0 pointer-events-none z-10 flex items-center">
+                        <motion.div
+                            className="relative flex items-center justify-end"
+                            animate={{
+                                width: `${(energy || 0) * 10}%`,
+                                opacity: energy ? 1 : 0.5
+                            }}
+                            transition={{ type: "spring", stiffness: 150, damping: 20 }}
+                        >
+                            <div className={cn(
+                                "absolute right-[-16px] w-8 h-8 rounded-full flex items-center justify-center bg-background border shadow-lg transition-colors",
+                                !energy ? "border-surfaceHighlight text-secondary" :
+                                    energy >= 8 ? "border-green-500/50 text-green-500" :
+                                        energy >= 5 ? "border-yellow-500/50 text-yellow-500" :
+                                            "border-red-500/50 text-red-500"
+                            )}>
+                                {energy === null ? <Battery className="w-4 h-4 opacity-50" /> :
+                                    energy >= 8 ? <BatteryFull className="w-4 h-4 fill-current" /> :
+                                        energy >= 4 ? <BatteryMedium className="w-4 h-4 fill-current" /> :
+                                            <BatteryLow className="w-4 h-4 fill-current" />
+                                }
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
                 <div className="flex justify-between text-[10px] text-secondary/40 mt-1 px-1 font-medium select-none">
                     <span>Low</span>
