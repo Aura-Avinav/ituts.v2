@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://ituts.vercel.app/</loc>
+    <loc>https://ituts-v4.vercel.app/</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://ituts.vercel.app/dark-mode-logo.png</image:loc>
+      <image:loc>https://ituts-v4.vercel.app/dark-mode-logo.png</image:loc>
       <image:title>Ituts — Productivity Tracker</image:title>
     </image:image>
   </url>

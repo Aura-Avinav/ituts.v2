@@ -18,4 +18,4 @@ User-agent: Baiduspider
 Allow: /
 
 # Sitemap
-Sitemap: https://ituts.vercel.app/sitemap.xml
+Sitemap: https://ituts-v4.vercel.app/sitemap.xml
