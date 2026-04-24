@@ -42,7 +42,7 @@ export function SettingsView({ onBack }: { onBack: () => void }) {
             </div>
 
             {/* Content Area - Split View */}
-            <div className="flex flex-col md:flex-row gap-8 flex-1">
+            <div className="flex flex-col lg:flex-row gap-8 flex-1">
                 {/* Sidebar */}
                 <div className="bg-surface border border-primary/5 rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.06)] shrink-0 h-max">
                     <SettingsSidebar activeTab={activeTab} onTabChange={setActiveTab} />
