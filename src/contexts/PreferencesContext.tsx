@@ -164,42 +164,19 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('ituts_preferences_v1', JSON.stringify(preferences));
     }, [preferences]);
 
-    // 4. Sync FROM Cloud (on load) - Profiles Table Source of Truth
+    // 4. Sync FROM Cloud (on load) — load preferences from user metadata if available.
+    // NOTE: The profiles.preferences column may not exist in all deployments.
+    // We use user_metadata as the reliable fallback (always available via Supabase Auth).
     useEffect(() => {
         if (!user) return;
 
-        const syncFromCloud = async () => {
-            try {
-                // 1. Fetch from Profiles Table (Authoritative)
-                const { data, error } = await supabase
-                    .from('profiles')
-                    .select('preferences')
-                    .eq('id', user.id)
-                    .single();
-
-                if (error && error.code !== 'PGRST116') {
-                    console.error("Failed to fetch preferences from profile", error);
-                    return;
-                }
-
-                if (data?.preferences) {
-                    setPreferences(prev => {
-                        // Merge strategies can be complex, but for now, cloud wins if it exists.
-                        // We could compare timestamps if we added them to local/cloud state.
-                        return { ...prev, ...data.preferences };
-                    });
-                } else {
-                    // 2. Fallback to User Metadata if Profile empty (Migration path)
-                    if (user.user_metadata?.preferences) {
-                        setPreferences(prev => ({ ...prev, ...user.user_metadata.preferences }));
-                    }
-                }
-            } catch (err) {
-                console.error("Error syncing preferences", err);
-            }
-        };
-
-        syncFromCloud();
+        // Use user metadata as the preferences source (always available, no schema dependency)
+        if (user.user_metadata?.preferences) {
+            setPreferences(prev => ({
+                ...prev,
+                ...user.user_metadata.preferences
+            }));
+        }
     }, [user]);
 
     // 5. Sync Accent Color to DOM (CSS Variable)
@@ -213,28 +190,17 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
     // Actions
     const updatePreferences = (updates: Partial<PreferencesState>) => {
         setPreferences(prev => {
-            const next = { ...prev, ...updates, _updatedAt: Date.now() }; // Update timestamp
-            // console.log('[Preferences] Updating Local:', updates);
+            const next = { ...prev, ...updates, _updatedAt: Date.now() };
 
-            // Sync to Cloud (Profiles Table & Metadata)
+            // Sync to User Metadata (fast, always-available, no schema dependency)
             if (user) {
-                // A. Update Profiles Table (Primary Storage)
-                supabase.from('profiles').upsert({
-                    id: user.id,
-                    preferences: next,
-                    updated_at: new Date().toISOString(),
-                    // Update legacy theme column if needed, or rely on JSONB
-                    theme: next.theme
-                }).then(({ error }) => {
-                    if (error) console.error('[Preferences] Profile Sync Error:', error);
-                });
-
-                // B. Update User Metadata (Fast Read Backup)
                 supabase.auth.updateUser({
                     data: { preferences: next }
                 }).then(({ error }) => {
-                    if (error)
-                        console.error('[Preferences] Metadata Sync Error:', error);
+                    if (error && import.meta.env.DEV) {
+                        // eslint-disable-next-line no-console
+                        console.warn('[Preferences] Metadata sync failed:', error.message);
+                    }
                 });
             }
 

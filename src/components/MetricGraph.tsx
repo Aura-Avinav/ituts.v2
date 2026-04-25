@@ -3,10 +3,14 @@ import type { AppData } from '../types';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import { Activity } from 'lucide-react';
 import { format, eachDayOfInterval } from 'date-fns';
+import { useState, useEffect } from 'react';
 
 export function MetricGraph({ date }: { date: Date }) {
     const { data } = useStore();
     const accent = data.preferences?.accentColor || 'rose';
+    // Delay chart render by one frame so ResponsiveContainer can measure real dimensions
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { setMounted(true); }, []);
 
     const colorMap: Record<string, string> = {
         blue: '#3A86FF',
@@ -39,7 +43,8 @@ export function MetricGraph({ date }: { date: Date }) {
                 </div>
             </div>
 
-            <div className="h-[200px] w-full min-h-[200px]">
+            <div className="h-[200px] w-full min-h-[200px] overflow-hidden">
+                {mounted && (
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={getChartData(data, date, activeHabits)}>
                         <defs>
@@ -81,6 +86,7 @@ export function MetricGraph({ date }: { date: Date }) {
                         />
                     </AreaChart>
                 </ResponsiveContainer>
+                )}
             </div>
         </div>
     );
