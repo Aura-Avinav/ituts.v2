@@ -15,7 +15,6 @@ import { useStore } from './hooks/useStore';
 import { PageTransition } from './components/ui/PageTransition';
 import { Loading } from './components/ui/Loading';
 import { SplashScreen } from './components/ui/SplashScreen';
-import { AnimatePresence } from 'framer-motion';
 import { useDynamicFavicon } from './hooks/useDynamicFavicon';
 import { MoodSelector } from './components/MoodSelector';
 
@@ -76,13 +75,8 @@ function App() {
 
 
 
-  // 1. Show Splash Screen while checking auth
   if (authLoading) {
-    return (
-      <AnimatePresence>
-        <SplashScreen />
-      </AnimatePresence>
-    );
+    return <SplashScreen />;
   }
 
   // 2. Show Auth Page directly if no user
@@ -173,8 +167,7 @@ function App() {
   return (
     <Layout currentView={view} onNavigate={setView} currentDate={currentDate}>
       <Suspense fallback={<Loading />}>
-        <AnimatePresence mode="wait">
-          {view === 'dashboard' ? (
+        {view === 'dashboard' ? (
           <PageTransition key="dashboard" className="space-y-8 pb-10">
             <header className="flex flex-col gap-6 md:flex-row md:items-end justify-between border-b border-surfaceHighlight pb-6">
               <div className="space-y-4 flex-1">
@@ -274,7 +267,6 @@ function App() {
             <SettingsView onBack={() => setView('dashboard')} />
           </PageTransition>
         ) : null}
-        </AnimatePresence>
       </Suspense>
     </Layout>
   );

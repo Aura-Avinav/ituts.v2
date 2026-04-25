@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useStore } from '../../../hooks/useStore';
 import { usePreferences } from '../../../contexts/PreferencesContext';
 import { Download } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export function WorkspaceSettings() {
     const { exportData } = useStore();
@@ -47,8 +46,6 @@ export function WorkspaceSettings() {
                     />
                 </div>
 
-
-
                 {/* Export Content */}
                 <div className="flex items-center justify-between py-4">
                     <div>
@@ -68,39 +65,33 @@ export function WorkspaceSettings() {
             </section>
 
             {/* Floating Action Bar for Unsaved Changes */}
-            <AnimatePresence>
-                {hasChanges && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 50, scale: 0.9 }}
-                        transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                        className="fixed bottom-6 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 flex items-center justify-between md:justify-start gap-2 p-1.5 pr-2 bg-card/95 backdrop-blur-xl text-foreground rounded-full shadow-2xl border border-primary/20 ring-1 ring-black/5 dark:ring-white/10"
-                    >
-                        <div className="pl-3 pr-2 py-1.5 text-xs font-medium flex items-center gap-2">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                            </span>
-                            Unsaved changes
-                        </div>
-                        <div className="flex items-center gap-1">
-                            <button
-                                onClick={handleCancel}
-                                className="px-3 py-1.5 rounded-full text-xs font-medium text-secondary hover:text-foreground hover:bg-surfaceHighlight/50 transition-colors"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleSave}
-                                className="px-4 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground shadow-sm hover:opacity-90 active:scale-95 transition-all"
-                            >
-                                Save Changes
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {hasChanges && (
+                <div
+                    className="fixed bottom-6 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 flex items-center justify-between md:justify-start gap-2 p-1.5 pr-2 bg-card/95 backdrop-blur-xl text-foreground rounded-full shadow-2xl border border-primary/20 ring-1 ring-black/5 dark:ring-white/10 animate-in slide-in-from-bottom-4 fade-in duration-300"
+                >
+                    <div className="pl-3 pr-2 py-1.5 text-xs font-medium flex items-center gap-2">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                        </span>
+                        Unsaved changes
+                    </div>
+                    <div className="flex items-center gap-1">
+                        <button
+                            onClick={handleCancel}
+                            className="px-3 py-1.5 rounded-full text-xs font-medium text-secondary hover:text-foreground hover:bg-surfaceHighlight/50 transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleSave}
+                            className="px-4 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground shadow-sm hover:opacity-90 active:scale-95 transition-all"
+                        >
+                            Save Changes
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import { Moon, Sun, Monitor, Type, Check, Globe, Languages, Volume2 } from 'lucide-react';
 import { useStore } from '../../../hooks/useStore';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
 import { cn } from '../../../lib/utils';
 import { useTranslation } from '../../../hooks/useTranslation';
@@ -12,7 +11,6 @@ export function PreferencesSettings() {
         updatePreferences
     } = useStore();
 
-    // Safely access global preferences with defaults
     // Safely access global preferences with defaults
     const globalPreferences = {
         theme: data.preferences?.theme || 'system',
@@ -43,10 +41,7 @@ export function PreferencesSettings() {
     // Sync draft with global state only when global state *values* change significantly
     useEffect(() => {
         if (!isDirty) {
-            // console.log('[PreferencesSettings] syncing draft to global:', stableGlobalPreferences.contentWidth);
             setDraft(stableGlobalPreferences);
-        } else {
-            // console.log('[PreferencesSettings] NOT syncing (dirty). Global:', stableGlobalPreferences.contentWidth, 'Draft:', draft.contentWidth);
         }
     }, [stableGlobalPreferences, isDirty]);
 
@@ -79,18 +74,13 @@ export function PreferencesSettings() {
         setIsDirty(false);
     };
 
-    // Helper for animation
-    const spring = {
-        type: "spring" as const,
-        stiffness: 700,
-        damping: 30
-    };
-
     const themes = [
         { id: 'light', icon: Sun, label: 'Light' },
         { id: 'dark', icon: Moon, label: 'Dark' },
         { id: 'system', icon: Monitor, label: 'System' }
     ] as const;
+
+    const themeIndex = themes.findIndex(t => t.id === draft.theme);
 
     return (
         <div className="space-y-8 animate-in fade-in duration-300 max-w-4xl px-1 pb-24 relative">
@@ -114,19 +104,15 @@ export function PreferencesSettings() {
                         <p className="text-xs text-secondary pl-9">Choose how the app looks.</p>
                     </div>
 
-                    <div className="p-1 rounded-xl inline-flex relative w-full sm:w-auto">
-                        <AnimatePresence>
-                            {/* Active Background Pill */}
-                            <motion.div
-                                layoutId="theme-active"
-                                className="absolute inset-y-1 rounded-lg bg-surfaceHighlight/50 shadow-sm"
-                                style={{
-                                    left: `calc(${themes.findIndex(t => t.id === draft.theme) * 33.333}% + 0.25rem)`,
-                                    width: `calc(33.333% - 0.5rem)`
-                                }}
-                                transition={spring}
-                            />
-                        </AnimatePresence>
+                    <div className="p-1 rounded-xl inline-flex relative w-full sm:w-auto bg-surface/50 border border-surfaceHighlight/20">
+                        {/* Active Background Pill */}
+                        <div
+                            className="absolute inset-y-1 rounded-lg bg-surfaceHighlight/50 shadow-sm transition-all duration-300 ease-out"
+                            style={{
+                                left: `calc(${themeIndex * 33.333}% + 0.25rem)`,
+                                width: `calc(33.333% - 0.5rem)`
+                            }}
+                        />
 
                         {themes.map((t) => {
                             const Icon = t.icon;
@@ -299,52 +285,6 @@ export function PreferencesSettings() {
                             </button>
                         </div>
 
-                        {/* Date Format */}
-                        {/* Date Format (Coming Soon) */}
-                        {/* 
-                        <div className="space-y-2 opacity-50 pointer-events-none filter grayscale">
-                            <label className="text-sm font-medium text-secondary flex items-center gap-2">
-                                <Calendar className="w-3.5 h-3.5" /> Date Format
-                            </label>
-                            <div className="relative">
-                                <select
-                                    value={draft.dateFormat || 'MM/DD/YYYY'}
-                                    onChange={(e) => handleChange('dateFormat', e.target.value)}
-                                    className="w-full p-2.5 bg-transparent hover:bg-surfaceHighlight/30 rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer appearance-none pl-3"
-                                >
-                                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
-                                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
-                                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className="space-y-2 opacity-50 pointer-events-none filter grayscale">
-                            <label className="text-sm font-medium text-secondary flex items-center gap-2">
-                                <Clock className="w-3.5 h-3.5" /> Time Format
-                            </label>
-                             <div className="flex gap-2">
-                                {[
-                                    { value: '12', label: '12-Hour' },
-                                    { value: '24', label: '24-Hour' }
-                                ].map((opt) => (
-                                    <button
-                                        key={opt.value}
-                                        onClick={() => handleChange('timeFormat', opt.value)}
-                                        className={cn(
-                                            "flex-1 p-2.5 text-sm font-medium rounded-lg transition-all",
-                                            draft.timeFormat === opt.value
-                                                ? "bg-blue-500/5 text-blue-600 dark:text-blue-400"
-                                                : "bg-transparent text-secondary hover:bg-surfaceHighlight/30"
-                                        )}
-                                    >
-                                        {opt.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div> 
-                        */}
-
                         {/* Start of Week */}
                         <div className="space-y-2">
                             <label className="text-sm font-medium text-secondary flex items-center gap-2">
@@ -373,10 +313,6 @@ export function PreferencesSettings() {
                     </div>
                 </div>
 
-
-                {/* Privacy & Data */}
-                {/* Typography */}
-                {/* Typography & System */}
                 <div className="space-y-8">
                     {/* Typography Section */}
                     <div className="space-y-4">
@@ -496,43 +432,35 @@ export function PreferencesSettings() {
                         </button>
                     </div>
                 </div>
-
-
             </div>
 
             {/* Floating Save Action Bar */}
-            <AnimatePresence>
-                {isDirty && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 50, scale: 0.9 }}
-                        transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                        className="fixed bottom-6 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 flex items-center justify-between md:justify-start gap-2 p-1.5 pr-2 bg-card/95 backdrop-blur-xl text-foreground rounded-full shadow-2xl border border-primary/20 ring-1 ring-black/5 dark:ring-white/10"
+            {isDirty && (
+                <div
+                    className="fixed bottom-6 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-50 flex items-center justify-between md:justify-start gap-2 p-1.5 pr-2 bg-card/95 backdrop-blur-xl text-foreground rounded-full shadow-2xl border border-primary/20 ring-1 ring-black/5 dark:ring-white/10 animate-in slide-in-from-bottom-4 fade-in duration-300"
+                >
+                    <div className="pl-4 pr-2 text-sm font-medium whitespace-nowrap flex items-center gap-2">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                        </span>
+                        Unsaved Changes
+                    </div>
+                    <div className="h-6 w-px bg-border mx-1" />
+                    <button
+                        onClick={handleCancel}
+                        className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-surfaceHighlight rounded-full transition-colors"
                     >
-                        <div className="pl-4 pr-2 text-sm font-medium whitespace-nowrap flex items-center gap-2">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                            </span>
-                            Unsaved Changes
-                        </div>
-                        <div className="h-6 w-px bg-border mx-1" />
-                        <button
-                            onClick={handleCancel}
-                            className="px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-surfaceHighlight rounded-full transition-colors"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={handleSave}
-                            className="px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-transform active:scale-95 shadow-sm"
-                        >
-                            Save Changes
-                        </button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        Cancel
+                    </button>
+                    <button
+                        onClick={handleSave}
+                        className="px-5 py-2 text-sm font-bold bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-transform active:scale-95 shadow-sm"
+                    >
+                        Save Changes
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

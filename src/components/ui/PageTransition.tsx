@@ -1,16 +1,10 @@
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
+import { cn } from '../../lib/utils';
 
 export function PageTransition({ children, className }: { children: ReactNode; className?: string }) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className={className}
-        >
+        <div className={cn("animate-in fade-in slide-in-from-bottom-2 duration-300 ease-out", className)}>
             {children}
-        </motion.div>
+        </div>
     );
 }
