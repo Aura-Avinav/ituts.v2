@@ -14,15 +14,24 @@ export default defineConfig({
     }
   },
   build: {
+    // Faster transpilation target
+    target: 'es2020',
+    // Disable sourcemaps in production (saves build time + bundle size)
+    sourcemap: false,
+    // Raise chunk size warning threshold (framer-motion + recharts are large by design)
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
+          // Core React runtime — tiny, pulled from node_modules
+          'react-vendor': ['react', 'react-dom', 'react-dom/client'],
+          // Animation + icons + charts — large but stable, cached well
           'ui-vendor': ['framer-motion', 'lucide-react', 'recharts'],
+          // Data layer — Supabase SDK + date utilities
           'data-vendor': ['@supabase/supabase-js', 'date-fns'],
-          'ai-vendor': ['@google/generative-ai', 'ai']
         }
       }
     }
   }
 })
+

@@ -41,7 +41,7 @@ function App() {
         return 'dashboard'; // Default if no preference
       } else {
         // 2. Existing Session (Refresh): Restore Last Open View
-        const savedView = localStorage.getItem('journal_current_view');
+        const savedView = sessionStorage.getItem('journal_current_view');
         return (savedView as ViewState) || 'dashboard';
       }
     }
@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     // Don't save 'settings' as the current view to return to, strictly speaking, or maybe yes?
     // For now, keep saving all.
-    localStorage.setItem('journal_current_view', view);
+    sessionStorage.setItem('journal_current_view', view);
   }, [view]);
 
 

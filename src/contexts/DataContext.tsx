@@ -49,23 +49,18 @@ export function DataProvider({ children }: { children: ReactNode }) {
     const [metrics, setMetrics] = useState<MetricData[]>([]);
     const [loading, setLoading] = useState(true);
 
-    // Load Data
+    // Account required: no guest/offline mode.
+    // Purge any legacy 'aura_data' from localStorage on mount (one-time cleanup
+    // for users who had the old guest-mode cache). All data lives in Supabase.
+    useEffect(() => {
+        localStorage.removeItem('aura_data');
+    }, []);
+
+    // Load data from Supabase when user is authenticated.
     useEffect(() => {
         if (!user) {
-            // Load from LocalStorage if no user (Guest Mode / Offline)
-            const local = localStorage.getItem('aura_data');
-            if (local) {
-                try {
-                    const parsed = JSON.parse(local);
-                    setHabits(parsed.habits || []);
-                    setAchievements(parsed.achievements || []);
-                    setTodos(parsed.todos || []);
-                    setJournal(parsed.journal || {});
-                    setMetrics(parsed.metrics || []);
-                } catch (e) {
-                    console.error("Failed to parse local data", e);
-                }
-            }
+            // No user — App.tsx will redirect to AuthPage. Nothing to load.
+            setLoading(false);
             return;
         }
 
@@ -79,15 +74,11 @@ export function DataProvider({ children }: { children: ReactNode }) {
             const habitsFormatted = (dbHabits || []).map((h: any) => ({
                 id: h.id,
                 name: h.name,
-                month: h.month, // Map month field
+                month: h.month,
                 category: h.category,
                 completedDates: (dbCompletions || [])
                     .filter((c: any) => c.habit_id === h.id)
-                    .map((c: any) => {
-                        // Normalize date: ensure it's YYYY-MM-DD
-                        // If it's a full timestamp (e.g. 2024-02-15T00:00:00), take the first part.
-                        return String(c.completed_date).split('T')[0];
-                    })
+                    .map((c: any) => String(c.completed_date).split('T')[0])
             }));
             setHabits(habitsFormatted);
 
@@ -122,18 +113,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
         fetchData();
     }, [user]);
-
-    // Persist to LocalStorage on Change
-    useEffect(() => {
-        const dataToSave = {
-            habits,
-            achievements,
-            todos,
-            journal,
-            metrics
-        };
-        localStorage.setItem('aura_data', JSON.stringify(dataToSave));
-    }, [habits, achievements, todos, journal, metrics]);
 
     // --- Actions ---
 
